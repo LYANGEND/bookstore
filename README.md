@@ -8,7 +8,9 @@
 ## Built With
 
 - JavaScript
-- React
+- React, redux
+
+
 
 
 
