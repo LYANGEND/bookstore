@@ -85,6 +85,8 @@ ul {
   background-color: white;
   text-align: start;
   padding: 20px;
+  border-right: solid #e8e8e8;
+  gap: 20px;
 }
 
 p {
@@ -179,6 +181,7 @@ li button {
   padding: 5px;
   border: none;
   margin-right: 5px;
+  border-right: solid #e8e8e8;
 }
 
 .chap {
