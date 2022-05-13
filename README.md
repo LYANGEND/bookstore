@@ -42,7 +42,7 @@ To get a local copy up and running follow these simple example steps.
 - LinkedIn: [David Lyangenda](hhttps://www.linkedin.com/in/david-lyangenda-623087151/)
 
 
-## 🤝 Contributing/
+## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
