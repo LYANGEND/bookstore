@@ -33,9 +33,9 @@ To get a local copy up and running follow these simple example steps.
    ```
 
 
-## Authors
+## Author
 
-👤 **Solomon Hagan**
+👤 **David Lyangenda**
 
 - GitHub: [@LYANGENDA](https://github.com/LYANGEND)
 - Twitter: [@Lyangenda_david](https://twitter.com/david_lyangenda)

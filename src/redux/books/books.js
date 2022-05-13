@@ -1,66 +1,47 @@
-import API from '../services/api';
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
+/* eslint-disable import/extensions */
+import * as Api from '../../api/api';
 
-const ADD_BOOK = 'bookstore-app/books/ADD_BOOK';
-const REMOVE_BOOK = 'bookstore-app/books/REMOVE_BOOK';
-const GET_BOOKS = 'bookstore-app/books/GET_BOOKS';
+const ADD_BOOK = 'ADD_BOOK';
+const REMOVE_BOOK = 'REMOVE_BOOK';
+const FETCH_ALL_BOOK = 'FETCH_ALL_BOOK';
 
-const initialState = {
-  books: [],
-};
-
-const booksReducer = (state = initialState, action) => {
-  let books;
+export const reducer = (book = [], action) => {
   switch (action.type) {
-    case GET_BOOKS:
-      books = Object.keys(action.payload).map((id) => ({
-        id,
-        title: action.payload[id][0].title,
-        author: action.payload[id][0].author,
-        category: action.payload[id][0].category,
-      }));
-      return {
-        ...state,
-        books,
-      };
+    case FETCH_ALL_BOOK:
+      return action.payload;
     case ADD_BOOK:
-      return {
-        ...state,
-        books: state.books.concat(action.payload),
-      };
+      return [...book, action.book];
     case REMOVE_BOOK:
-      return {
-        ...state,
-        books: state.books.filter((book) => book.id !== action.payload),
-      };
-    default: return state;
+      return [...book].filter((book) => book.item_id !== action.id);
+    default:
+      return book;
   }
 };
 
-export const getBooks = () => (dispatch) => {
-  API.getBooks((res) => {
-    dispatch({
-      type: GET_BOOKS,
-      payload: res.data,
-    });
-  });
+export default reducer;
+
+export const createBook = (book) => async (dispatch) => {
+  await Api.addBook(book);
+  dispatch({ type: ADD_BOOK, book });
+};
+export const removeBook = (id) => async (dispatch) => {
+  await Api.deleteBook(id);
+  dispatch({ type: REMOVE_BOOK, id });
 };
 
-export const addBook = (book) => (dispatch) => {
-  API.addBook(book, () => {
-    dispatch({
-      type: ADD_BOOK,
-      payload: book,
-    });
-  });
+const reformulateData = (data) => {
+  const books = Object.entries(data);
+  return books.map((element) => ({ item_id: element[0], ...element[1][0] }));
 };
 
-export const removeBook = (bookId) => (dispatch) => {
-  API.removeBook(bookId, () => {
-    dispatch({
-      type: REMOVE_BOOK,
-      payload: bookId,
-    });
+export const getAllBooks = () => async (dispatch) => {
+  const { data } = await Api.fetchAll();
+  const bookAvailable = reformulateData(data);
+
+  dispatch({
+    type: FETCH_ALL_BOOK,
+    payload: bookAvailable,
   });
 };
-
-export default booksReducer;

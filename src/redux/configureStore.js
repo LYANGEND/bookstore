@@ -1,16 +1,21 @@
-import { combineReducers, legacy_createStore as createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import booksReducer from './books/books';
-import categoriesReducer from './categories/categories';
+/* eslint-disable no-underscore-dangle */
+import {
+  combineReducers,
+  createStore,
+  applyMiddleware,
+  compose,
+} from 'redux';
+import thunk from 'redux-thunk';
+import bookReducer from './books/books';
+import categoryReducer from './categories/categories';
 
-const rootReducer = combineReducers({
-  books: booksReducer,
-  categories: categoriesReducer,
-});
+const rootReducer = combineReducers({ bookReducer, categoryReducer });
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
-
-const store = createStore(rootReducer, composedEnhancer);
+const store = createStore(
+  rootReducer, { bookReducer: [], categoryReducer: [] },
+  compose(
+    applyMiddleware(thunk),
+  ),
+);
 
 export default store;
