@@ -79,12 +79,14 @@ ul {
   margin: 30px;
   border-radius: 5px;
   border: solid 1px #e8e8e8;
+  background-color: white;
 }
 
 .grid-item {
   background-color: white;
   text-align: start;
   padding: 20px;
+  gap: 20px;
 }
 
 p {
@@ -116,6 +118,11 @@ p {
 .item1 {
   display: flex;
   align-items: center;
+  height: 115px;
+  border-right: 1px solid #e8e8e8;
+  padding: 9px;
+  margin-top: 36px;
+  margin-right: 140px;
 }
 
 .list {
@@ -179,6 +186,7 @@ li button {
   padding: 5px;
   border: none;
   margin-right: 5px;
+  border-right: solid #e8e8e8;
 }
 
 .chap {
